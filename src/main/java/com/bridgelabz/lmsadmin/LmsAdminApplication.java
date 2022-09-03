@@ -1,0 +1,16 @@
+package com.bridgelabz.lmsadmin;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+
+@SpringBootApplication
+@Slf4j
+public class LmsAdminApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(LmsAdminApplication.class, args);
+    }
+
+}
