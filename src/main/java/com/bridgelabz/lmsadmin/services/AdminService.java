@@ -71,7 +71,7 @@ public class AdminService implements IAdminService{
             String body = "Admin updated Successfully with id  :" + isAdminPresent.get().getId();
             String subject = "Admin updated Successfully....";
             mailService.send(isAdminPresent.get().getEmailId(), body, subject);
-            return new Response("Update Admin Details", 200, isAdminPresent);
+            return new Response("Update Admin Details", 200, isAdminPresent.get());
         }
         throw  new AdminException(400, "Admin not Present");
     }
@@ -128,19 +128,6 @@ public class AdminService implements IAdminService{
     }
 
     @Override
-    public Response validateUser(String token) {
-        Long id = tokenUtil.decodeToken(token);
-        Optional<AdminModel> isPresent = adminRepository.findById(id);
-        //if Admin Present validate successfully
-        if (isPresent.isPresent()){
-            isPresent.get().setStatus(true);
-            adminRepository.save(isPresent.get());
-            return new Response("successfully validate", 200, null);
-        }
-        throw new AdminException(200, "Admin not found");
-    }
-
-    @Override
     public Response addProfilePath(Long id, String profilePath, String token) {
         Long adminId = tokenUtil.decodeToken(token);
         Optional<AdminModel> isTokenPresent = adminRepository.findById(adminId);
@@ -157,5 +144,15 @@ public class AdminService implements IAdminService{
             throw new AdminException(400, "Admin not found");
         }
         throw new AdminException(400, "Token not found");
+    }
+
+    @Override
+    public Boolean validate(String token) {
+        Long userId = tokenUtil.decodeToken(token);
+        Optional<AdminModel> isUserPresent = adminRepository.findById(userId);
+        if (isUserPresent.isPresent()) {
+            return true;
+        }
+        return false;
     }
 }

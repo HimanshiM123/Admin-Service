@@ -75,7 +75,6 @@ public class AdminController {
      */
     @DeleteMapping("deleteAdmin/{id}")
     ResponseEntity<Response> deleteAdmin(@PathVariable Long id, @RequestHeader String token){
-
         Response response = adminService.deleteAdmin(id, token);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
@@ -128,11 +127,11 @@ public class AdminController {
      @Purpose : Able to validate admin in the Admin Repository
      @Param : token
      */
+    @GetMapping("/validate/{token}")
+    public Boolean validate(@PathVariable String token) {
 
-    @GetMapping("/validateUser/{token}")
-    ResponseEntity<Response> validateUser(@PathVariable String token){
-        Response response = adminService.validateUser(token);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return adminService.validate(token);
     }
+    //eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.mtGmYeM-ovXwBerb-2nuUaTVgpOEUjS2VqcW2FzJ_hg
 
 }

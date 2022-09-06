@@ -26,9 +26,8 @@ public interface IAdminService {
     Response updatePassword(String token, String newPassword);
 
     Response resetPassword(String emailId);
-
-    Response validateUser(String token);
-
-
+    
     Response addProfilePath(Long id, String profilePath, String token);
+
+    Boolean validate(String token);
 }
